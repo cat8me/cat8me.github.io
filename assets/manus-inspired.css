@@ -1,4 +1,9 @@
 /* Manus-inspired improvements, adapted to the existing Postcard Journey style. */
+.hero {
+  background-image: url("./hero-germany-austria-2026.webp");
+  background-position: center 45%;
+}
+
 .day-jump {
   display: flex;
   align-items: center;
@@ -628,6 +633,7 @@
 @media (max-width: 600px) {
   .hero {
     min-height: 760px;
+    background-position: 68% center;
   }
 
   .day-jump {
