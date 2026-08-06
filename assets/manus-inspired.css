@@ -54,6 +54,124 @@
   scroll-margin-top: 32px;
 }
 
+.quick-reference {
+  background: #f7f2e9;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.quick-reference .section-head {
+  margin-bottom: 32px;
+}
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.quick-card {
+  min-height: 250px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #d9d0c1;
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.quick-card::after {
+  content: "";
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  right: -35px;
+  bottom: -35px;
+  border-radius: 50%;
+  background: #a94f3d12;
+}
+
+.quick-card:hover,
+.quick-card:focus-visible {
+  border-color: #a94f3d;
+  box-shadow: 0 14px 35px #49332e12;
+  outline: none;
+  transform: translateY(-3px);
+}
+
+.quick-number {
+  align-self: flex-end;
+  color: #a94f3d70;
+  font: italic 30px/1 "Playfair Display", serif;
+}
+
+.quick-card small {
+  margin-top: 20px;
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .15em;
+}
+
+.quick-card h3 {
+  margin: 12px 0 8px;
+  font: 600 25px/1.15 "Playfair Display", serif;
+}
+
+.quick-card p {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.quick-card strong {
+  margin-top: auto;
+  color: var(--forest);
+  font-size: 11px;
+  letter-spacing: .04em;
+}
+
+/* Keep itinerary cards aligned so every stop is equally easy to scan. */
+.stop-card,
+.stop-card.featured {
+  min-height: 100%;
+  grid-column: auto;
+  display: flex;
+  flex-direction: column;
+  transform: none;
+}
+
+.stop-image,
+.stop-card.featured .stop-image {
+  height: 210px;
+  flex: 0 0 210px;
+}
+
+.stop-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.stop-body > p {
+  flex: 1;
+}
+
+.card-actions {
+  margin-top: auto;
+}
+
+@media (max-width: 900px) {
+  .quick-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 600px) {
   .hero {
     min-height: 760px;
@@ -89,5 +207,29 @@
 
   .hero-actions {
     margin-top: 16px;
+  }
+
+  .quick-reference {
+    overflow: hidden;
+  }
+
+  .quick-grid {
+    width: calc(100vw - 6vw);
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 2px 6vw 12px 0;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .quick-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .quick-card {
+    min-width: min(82vw, 330px);
+    min-height: 235px;
+    scroll-snap-align: start;
   }
 }
