@@ -166,8 +166,112 @@
   margin-top: auto;
 }
 
+/* A photo-led pocket list keeps optional favourites consistent and quick to scan. */
+.pocket-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.pocket-card {
+  min-width: 0;
+  min-height: 430px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: 0 12px 35px #5d3b2514;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.pocket-card:hover {
+  border-color: #bd9a78;
+  box-shadow: 0 18px 42px #5d3b2524;
+  transform: translateY(-3px);
+}
+
+.pocket-image {
+  height: 220px;
+  flex: 0 0 220px;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.pocket-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, #281b1666);
+}
+
+.pocket-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .45s ease;
+}
+
+.pocket-card:hover .pocket-image img {
+  transform: scale(1.04);
+}
+
+.pocket-image > span {
+  position: absolute;
+  z-index: 1;
+  left: 15px;
+  bottom: 14px;
+  padding: 7px 9px;
+  background: #fffaf1e8;
+  color: var(--forest);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .13em;
+}
+
+.pocket-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+}
+
+.pocket-body > small {
+  color: var(--gold);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .16em;
+}
+
+.pocket-body h3 {
+  margin: 9px 0 10px;
+  font: 600 24px/1.15 "Playfair Display", serif;
+}
+
+.pocket-body p {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.pocket-body > a {
+  margin-top: auto;
+  color: var(--forest);
+  font-size: 11px;
+  font-weight: 700;
+  text-underline-offset: 4px;
+}
+
 @media (max-width: 900px) {
   .quick-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pocket-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -230,6 +334,30 @@
   .quick-card {
     min-width: min(82vw, 330px);
     min-height: 235px;
+    scroll-snap-align: start;
+  }
+
+  .pocket {
+    overflow: hidden;
+  }
+
+  .pocket-grid {
+    width: calc(100vw - 6vw);
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 2px 6vw 12px 0;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .pocket-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pocket-card {
+    min-width: min(82vw, 330px);
+    min-height: 420px;
     scroll-snap-align: start;
   }
 }
