@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
     <script type="module" crossorigin src="/assets/index-CGSoxpVX.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CBTEl5Wt.css">
+    <link rel="stylesheet" href="/assets/manus-inspired.css">
   </head>
   <body>
     <header class="site-header" id="top">
@@ -29,6 +30,19 @@
           <div class="postmark">MUC · 08 SEP 2026</div>
           <h1>Germany <i>&</i> Austria</h1>
           <p class="hero-sub">Nine days of alpine lakes, old towns and open roads.</p>
+          <nav class="day-jump" aria-label="Jump to a trip day">
+            <span>Jump to</span>
+            <div>
+              <a href="#day-1" aria-label="Jump to day 1">D1</a>
+              <a href="#day-2" aria-label="Jump to day 2">D2</a>
+              <a href="#day-3" aria-label="Jump to day 3">D3</a>
+              <a href="#day-4" aria-label="Jump to day 4">D4</a>
+              <a href="#day-5" aria-label="Jump to day 5">D5</a>
+              <a href="#day-6" aria-label="Jump to day 6">D6</a>
+              <a href="#day-7" aria-label="Jump to day 7">D7</a>
+              <a href="#day-8" aria-label="Jump to day 8">D8</a>
+            </div>
+          </nav>
           <div class="hero-actions"><a class="button primary" href="#itinerary">Open the itinerary</a><button class="button glass" id="share-trip">Share this trip</button></div>
         </div>
         <div class="hero-facts" aria-label="Trip summary">
@@ -86,5 +100,22 @@
 
     <footer><div><span class="brand-mark">B</span><strong>Germany & Austria<br>Postcard Journey 2026</strong></div><p>Slow travel · Great food · Beautiful light</p><a href="#top">Back to top ↑</a></footer>
     <div class="toast" role="status" aria-live="polite"></div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const dates = [
+          '2026-09-08', '2026-09-09', '2026-09-10', '2026-09-11',
+          '2026-09-12', '2026-09-13', '2026-09-14', '2026-09-15', '2026-09-16'
+        ];
+        const labelDays = () => {
+          document.querySelectorAll('.day-block').forEach((day) => {
+            const dayNumber = dates.indexOf(day.dataset.date) + 1;
+            if (dayNumber) day.id = `day-${dayNumber}`;
+          });
+        };
+        const days = document.querySelector('#days');
+        labelDays();
+        new MutationObserver(labelDays).observe(days, { childList: true });
+      });
+    </script>
   </body>
 </html>

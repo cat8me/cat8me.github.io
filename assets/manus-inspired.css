@@ -1,0 +1,93 @@
+/* Manus-inspired improvements, adapted to the existing Postcard Journey style. */
+.day-jump {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 30px;
+  max-width: fit-content;
+}
+
+.day-jump > span {
+  color: #ffffffb8;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.day-jump > div {
+  display: flex;
+  gap: 7px;
+}
+
+.day-jump a {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #ffffff70;
+  background: #ffffff14;
+  color: #fff;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.day-jump a:hover,
+.day-jump a:focus-visible {
+  background: #fff;
+  border-color: #fff;
+  color: var(--ink);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.hero-actions {
+  margin-top: 20px;
+}
+
+.day-block {
+  scroll-margin-top: 32px;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 760px;
+  }
+
+  .day-jump {
+    display: block;
+    max-width: 100%;
+    margin-top: 24px;
+  }
+
+  .day-jump > span {
+    display: block;
+    margin-bottom: 9px;
+  }
+
+  .day-jump > div {
+    width: calc(100vw - 14vw);
+    overflow-x: auto;
+    padding-bottom: 5px;
+    scrollbar-width: none;
+  }
+
+  .day-jump > div::-webkit-scrollbar {
+    display: none;
+  }
+
+  .day-jump a {
+    min-width: 40px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .hero-actions {
+    margin-top: 16px;
+  }
+}
