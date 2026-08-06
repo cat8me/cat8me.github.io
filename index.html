@@ -17,7 +17,7 @@
     <header class="site-header" id="top">
       <a class="brand" href="#top" aria-label="Back to top"><span class="brand-mark">B</span><span>Postcard<br>Journey</span></a>
       <nav aria-label="Main navigation">
-        <a href="#route">The Route</a><a href="#quick-reference">Quick Guide</a><a href="#itinerary">Itinerary</a><a href="#pocket">Pocket List</a><a href="#guestbook">Guestbook</a>
+        <a href="#route">The Route</a><a href="#quick-reference">Quick Guide</a><a href="#itinerary">Itinerary</a><a href="#pocket">Pocket List</a><a href="#guestbook">Reviews</a>
       </nav>
       <button class="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
     </header>
@@ -146,16 +146,26 @@
       </section>
 
       <section class="section guestbook" id="guestbook">
-        <div class="guestbook-copy"><div class="section-kicker">TRAVEL TOGETHER</div><h2>Travel guestbook</h2><p>Leave a rating, a note for the road, or one small thing we should not forget.</p><div class="rating-summary"><strong id="rating-average">—</strong><span><span class="stars gold">★★★★★</span><small id="rating-count">No notes yet</small></span></div></div>
+        <div class="guestbook-copy">
+          <div class="section-kicker">TRAVEL TOGETHER</div>
+          <h2>Recommendations<br>&amp; reviews</h2>
+          <p>Rate the trip idea, save places you would recommend, or leave one practical note for the road.</p>
+          <div class="rating-summary" aria-label="Review summary"><strong id="rating-average">—</strong><span><span class="stars gold" aria-hidden="true">★★★★★</span><small id="rating-count">No notes yet</small></span></div>
+          <div class="review-status" aria-label="Preview storage status">
+            <span><b id="saved-count">0</b> saved places</span>
+            <span>Saved on this device</span>
+          </div>
+        </div>
         <div class="guestbook-panel">
           <form id="comment-form">
+            <div class="review-panel-head"><div><small>YOUR REVIEW</small><h3>Share a travel note</h3></div><span>Private preview</span></div>
             <label>Your name<input name="name" maxlength="24" placeholder="What should we call you?" required></label>
-            <fieldset><legend>Your rating</legend><div class="star-input" aria-label="Choose a rating"></div></fieldset>
-            <label>Your note<textarea name="message" maxlength="280" rows="4" placeholder="For example: check the Hallstatt boat timetable." required></textarea></label>
+            <fieldset><legend>Your rating</legend><div class="rating-control"><div class="star-input" aria-label="Choose a rating"></div><output id="rating-choice" aria-live="polite">5 — Essential</output></div></fieldset>
+            <label>Your note<textarea name="message" maxlength="280" rows="4" placeholder="For example: check the Hallstatt boat timetable." required></textarea><small class="character-count"><span id="note-count">0</span>/280</small></label>
             <button class="button primary" type="submit">Add to guestbook</button>
-            <p class="form-note">Preview notes stay in this browser. Shared comments can be enabled when the final site is published with a database.</p>
+            <p class="form-note">Ratings, recommendations and notes are saved only in this browser. Shared public reviews will require a database.</p>
           </form>
-          <div class="comments" id="comments" aria-live="polite"></div>
+          <div class="notes-panel"><div class="notes-head"><div><small>RECENT</small><h3>Traveller notes</h3></div><span>On this device</span></div><div class="comments" id="comments" aria-live="polite"></div></div>
         </div>
       </section>
     </main>
@@ -168,15 +178,186 @@
           '2026-09-08', '2026-09-09', '2026-09-10', '2026-09-11',
           '2026-09-12', '2026-09-13', '2026-09-14', '2026-09-15', '2026-09-16'
         ];
+        const recommendationKey = 'alpine-trip-recommendations-v1';
+        const guideNotes = {
+          'SIXT Munich Airport': {
+            story: 'Munich Airport is the practical starting point for the road trip. The rental-car desks sit within the airport complex, so this stop is about making a calm transition from the flight to the drive south.',
+            look: 'Before leaving, photograph the car, confirm the fuel policy and set Salzburg as the first navigation destination.'
+          },
+          'HOTEL max70': {
+            story: 'This is a quiet first-night base outside the busiest lanes of Salzburg Old Town—a useful place to reset after the long flight before exploring on foot the next morning.',
+            look: 'Confirm the parking arrangement at check-in and ask for the simplest public-transport or walking route into the historic centre.'
+          },
+          'Augustiner Bräu Kloster Mülln': {
+            story: 'This monastery brewery is known for its large, convivial beer halls and chestnut-shaded garden. The experience is as much about the shared tables and local rhythm as the beer itself.',
+            look: 'Notice the traditional stone mugs and the food stalls; choose a few small dishes to share rather than planning a formal dinner.'
+          },
+          'Mirabell Gardens': {
+            story: 'Mirabell is Salzburg at its most theatrical: formal flower beds, statues and long sightlines arranged to frame Hohensalzburg Fortress above the old town.',
+            look: 'Walk toward the Pegasus Fountain, then turn back for the classic garden-and-fortress composition in the soft morning light.'
+          },
+          'Salzburg Old Town': {
+            story: 'The old town grew between the Salzach River and the steep Mönchsberg. Baroque façades, narrow lanes and wrought-iron shop signs reveal the city’s long life as an ecclesiastical and trading centre.',
+            look: 'Look above eye level along Getreidegasse, pause in the small passageways and listen for church bells before choosing a café.'
+          },
+          'Seewirt Zauner': {
+            story: 'A central lakeside base makes it easier to experience Hallstatt before day visitors arrive and again after the village quiets in the evening.',
+            look: 'Ask about arrival access, luggage handling and parking before reaching the village, where vehicle movement is limited.'
+          },
+          'Hallstatt Lakeside': {
+            story: 'Hallstatt’s dramatic setting comes from the narrow strip of settlement between the lake and the Dachstein mountains. Its identity has been shaped by water, steep terrain and centuries of salt culture.',
+            look: 'Compare the reflections and changing mountain layers from the waterfront at dawn and dusk, when the streets are usually calmer.'
+          },
+          'Hallstatt Skywalk': {
+            story: 'The elevated viewpoint makes the village’s geography immediately clear: houses cling to the shore while the lake fills the valley below.',
+            look: 'Use the panorama to trace the waterfront, ferry route and mountain walls; clouds moving through the valley can change the scene within minutes.'
+          },
+          'Salzwelten Hallstatt': {
+            story: 'Salt is the reason Hallstatt became important long before it became famous for its view. A visit connects the postcard village to the working landscape and ancient mining heritage above it.',
+            look: 'Check the current opening notice and tour requirements first, then allow time for the mountain journey as well as the underground visit.'
+          },
+          'Leaving Hallstatt': {
+            story: 'The farewell is part of the experience. Early light often reveals details hidden by the busier middle of the day, from boathouses and reflections to mist over the water.',
+            look: 'Take one last waterfront walk, buy provisions for the long drive and leave enough time for two relaxed rest stops.'
+          },
+          'Burg Rabenstein': {
+            story: 'Burg Rabenstein rises above the wooded Ailsbach Valley in Franconian Switzerland. Its hilltop position reflects the defensive logic of medieval castles and creates a strong sense of arrival.',
+            look: 'Notice how the walls, rock and forest work together; ask locally which castle areas or nearby paths are accessible during the stay.'
+          },
+          'Franconian Switzerland': {
+            story: 'This region is known for limestone valleys, wooded hills, caves and compact villages. The landscape rewards a slow walk more than a long checklist of stops.',
+            look: 'Choose a short marked trail and watch for rock formations, half-timbered houses and small breweries along the valley roads.'
+          },
+          'Birthday Celebration': {
+            story: 'This is the emotional centre of the journey: a day designed around place, company and memory rather than sightseeing targets.',
+            look: 'Keep the schedule loose, confirm the dinner arrangement and leave a little time for portraits around the castle before the light fades.'
+          },
+          'BMW Museum': {
+            story: 'The museum tells BMW’s design and engineering story through cars, motorcycles and changing ideas about mobility. The sculptural building is part of the experience, not just a container for it.',
+            look: 'Follow the chronological thread, then spend extra time with the models or design eras that connect most strongly to your own memories.'
+          },
+          'BMW Welt': {
+            story: 'BMW Welt combines exhibition space, architecture and the theatre of vehicle delivery. Its open interior feels more like a public design hall than a conventional showroom.',
+            look: 'Look up at the sweeping roof and bridges, then compare how each brand uses materials, sound and lighting to create a distinct identity.'
+          },
+          'Haus im Tal': {
+            story: 'This central base places the old town, Isartor and the markets within an easy walk, making the final Munich days flexible and largely car-free.',
+            look: 'Confirm parking or unloading before arrival, then mark the quickest walking route to Marienplatz and the airport-return plan for D8.'
+          },
+          'Hofbräuhaus München': {
+            story: 'Munich’s famous beer hall is a piece of living social culture: long communal tables, music and a lively mix of visitors and regulars.',
+            look: 'Pause to take in the painted ceilings and atmosphere before finding a seat; expect noise, shared tables and a less hurried style of service.'
+          },
+          'Marienplatz': {
+            story: 'Marienplatz has been Munich’s civic heart for centuries. The ornate New Town Hall dominates the square, while streets radiate toward churches, markets and former city gates.',
+            look: 'Study the façade of the Neues Rathaus, check the Glockenspiel timing and step into a side street for a less crowded view back toward the square.'
+          },
+          'Viktualienmarkt': {
+            story: 'What began as a practical food market now offers a compact introduction to Bavarian produce, delicacies and everyday city life beside the old town.',
+            look: 'Browse once before buying, notice the seasonal displays and choose one snack that is easy to eat while continuing the walk.'
+          },
+          'RIMOWA Munich': {
+            story: 'The stop fits naturally into Munich’s refined shopping district and offers a close look at the brand’s distinctive grooved luggage and construction details.',
+            look: 'Bring the exact size, colour and model preferences, compare cabin dimensions carefully and keep the separate pharmacy item on the same shopping checklist.'
+          },
+          'Munich Airport': {
+            story: 'The final Germany stop is a sequence rather than a single place: refuel, document the car return, check in and move through security with enough time to stay unhurried.',
+            look: 'Follow the rental-return signs before the terminal signs and keep the fuel receipt and return confirmation until the trip is complete.'
+          },
+          'Taoyuan International Airport T2': {
+            story: 'The last card closes the loop from the Alps back to Taiwan. It is the moment when practical travel ends and the photographs and small stories begin to become the trip’s memory.',
+            look: 'Check that documents and purchases are together before leaving arrivals, then back up the first selection of photographs after getting home.'
+          }
+        };
+        const readRecommendations = () => {
+          try { return new Set(JSON.parse(localStorage.getItem(recommendationKey) || '[]')); }
+          catch { return new Set(); }
+        };
+        const updateSavedCount = () => {
+          const count = readRecommendations().size;
+          const output = document.querySelector('#saved-count');
+          if (output) output.textContent = count;
+        };
+        const enhanceRecommendations = () => {
+          const saved = readRecommendations();
+          document.querySelectorAll('.mini-rate').forEach((button) => {
+            const isSaved = saved.has(button.dataset.place);
+            button.classList.toggle('rated', isSaved);
+            const label = isSaved ? '★ Recommended' : '☆ Recommend';
+            if (button.textContent !== label) button.textContent = label;
+            button.setAttribute('aria-pressed', String(isSaved));
+          });
+          updateSavedCount();
+        };
+        const enhanceGuideNotes = () => {
+          document.querySelectorAll('.stop-card').forEach((card) => {
+            if (card.querySelector('.guide-toggle')) return;
+            const title = card.querySelector('h4')?.textContent.trim();
+            const note = guideNotes[title];
+            const actions = card.querySelector('.card-actions');
+            if (!note || !actions) return;
+
+            const details = document.createElement('details');
+            details.className = 'guide-toggle';
+            details.innerHTML = `
+              <summary><span><small>LOCAL CONTEXT</small>Guide notes</span><span class="toggle-mark" aria-hidden="true"></span></summary>
+              <div class="guide-copy">
+                <p>${note.story}</p>
+                <p><strong>Notice this</strong>${note.look}</p>
+              </div>`;
+            actions.before(details);
+          });
+        };
         const labelDays = () => {
           document.querySelectorAll('.day-block').forEach((day) => {
             const dayNumber = dates.indexOf(day.dataset.date) + 1;
             if (dayNumber) day.id = `day-${dayNumber}`;
           });
+          enhanceGuideNotes();
+          enhanceRecommendations();
         };
         const days = document.querySelector('#days');
         labelDays();
         new MutationObserver(labelDays).observe(days, { childList: true });
+
+        document.addEventListener('click', (event) => {
+          const recommendation = event.target.closest('.mini-rate');
+          if (recommendation) {
+            const saved = readRecommendations();
+            if (recommendation.classList.contains('rated')) saved.add(recommendation.dataset.place);
+            else saved.delete(recommendation.dataset.place);
+            localStorage.setItem(recommendationKey, JSON.stringify([...saved]));
+            recommendation.setAttribute('aria-pressed', String(recommendation.classList.contains('rated')));
+            updateSavedCount();
+          }
+
+          const star = event.target.closest('.star-input button');
+          if (star) {
+            const labels = ['Skip it', 'Optional', 'Worth a stop', 'Recommended', 'Essential'];
+            const rating = Number(star.dataset.rating);
+            document.querySelector('#rating-choice').textContent = `${rating} — ${labels[rating - 1]}`;
+            document.querySelectorAll('.star-input button').forEach((button) => {
+              button.setAttribute('aria-checked', String(Number(button.dataset.rating) === rating));
+            });
+          }
+        });
+
+        const note = document.querySelector('textarea[name="message"]');
+        note.addEventListener('input', () => { document.querySelector('#note-count').textContent = note.value.length; });
+        document.querySelector('#comment-form').addEventListener('submit', () => {
+          requestAnimationFrame(() => {
+            document.querySelector('#note-count').textContent = '0';
+            document.querySelector('#rating-choice').textContent = '5 — Essential';
+            document.querySelectorAll('.star-input button').forEach((button) => {
+              button.setAttribute('aria-checked', String(button.dataset.rating === '5'));
+            });
+          });
+        });
+        document.querySelector('.star-input').setAttribute('role', 'radiogroup');
+        document.querySelectorAll('.star-input button').forEach((button) => {
+          button.setAttribute('role', 'radio');
+          button.setAttribute('aria-checked', String(button.dataset.rating === '5'));
+        });
       });
     </script>
   </body>

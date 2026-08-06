@@ -166,6 +166,104 @@
   margin-top: auto;
 }
 
+/* Compact guide notes add context without making every itinerary card permanently tall. */
+.guide-toggle {
+  margin: 18px 0 16px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.guide-toggle summary {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 0;
+  color: var(--forest);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  list-style: none;
+}
+
+.guide-toggle summary::-webkit-details-marker {
+  display: none;
+}
+
+.guide-toggle summary > span:first-child {
+  display: grid;
+  gap: 3px;
+}
+
+.guide-toggle summary small {
+  color: var(--gold);
+  font-size: 8px;
+  letter-spacing: .16em;
+}
+
+.guide-toggle summary:hover,
+.guide-toggle summary:focus-visible {
+  color: var(--rust);
+  outline: none;
+}
+
+.toggle-mark {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  position: relative;
+  border: 1px solid #cbbdaa;
+  border-radius: 50%;
+}
+
+.toggle-mark::before,
+.toggle-mark::after {
+  content: "";
+  width: 10px;
+  height: 1px;
+  position: absolute;
+  top: 12px;
+  left: 7px;
+  background: currentColor;
+  transition: transform .2s ease;
+}
+
+.toggle-mark::after {
+  transform: rotate(90deg);
+}
+
+.guide-toggle[open] .toggle-mark::after {
+  transform: rotate(0);
+}
+
+.guide-copy {
+  padding: 2px 0 17px;
+}
+
+.guide-copy p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.guide-copy p + p {
+  margin-top: 11px;
+  padding: 11px 12px;
+  border-left: 2px solid var(--gold);
+  background: #f7f2e9;
+}
+
+.guide-copy strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--forest);
+  font-size: 8px;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
 /* A photo-led pocket list keeps optional favourites consistent and quick to scan. */
 .pocket-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -266,6 +364,160 @@
   text-underline-offset: 4px;
 }
 
+/* Reviews stay useful in preview mode without implying that local data is public. */
+.guestbook {
+  align-items: start;
+}
+
+.guestbook-copy {
+  position: sticky;
+  top: 42px;
+}
+
+.guestbook-copy h2 {
+  font-size: clamp(42px, 4.7vw, 68px);
+}
+
+.guestbook-copy > p {
+  max-width: 510px;
+}
+
+.review-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 26px;
+}
+
+.review-status span {
+  padding: 8px 11px;
+  border: 1px solid #ffffff45;
+  color: #eef3f5;
+  font-size: 10px;
+  letter-spacing: .06em;
+}
+
+.review-status b {
+  color: #fff;
+}
+
+.guestbook-panel {
+  padding: 0;
+  overflow: hidden;
+}
+
+.guestbook-panel form,
+.notes-panel {
+  padding: 34px 38px;
+}
+
+.guestbook-panel form {
+  border-bottom: 1px solid var(--line);
+}
+
+.review-panel-head,
+.notes-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.review-panel-head small,
+.notes-head small {
+  color: var(--gold);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .16em;
+}
+
+.review-panel-head h3,
+.notes-head h3 {
+  margin: 6px 0 0;
+  font: 600 27px/1.15 "Playfair Display", serif;
+}
+
+.review-panel-head > span,
+.notes-head > span {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: .07em;
+  white-space: nowrap;
+}
+
+.rating-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.star-input {
+  display: flex;
+  gap: 2px;
+}
+
+.star-input button {
+  transition: color .15s ease, transform .15s ease;
+}
+
+.star-input button:hover,
+.star-input button:focus-visible {
+  color: var(--gold);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+#rating-choice {
+  color: var(--forest);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.character-count {
+  display: block;
+  margin-top: -17px;
+  margin-bottom: 20px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 400;
+  text-align: right;
+}
+
+.notes-panel {
+  background: #f7f2e9;
+}
+
+.notes-panel .comments {
+  margin-top: 0;
+}
+
+.comment {
+  padding: 20px;
+  margin-top: 10px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.comment:first-child {
+  margin-top: 0;
+}
+
+.comment > div {
+  gap: 18px;
+}
+
+.empty-comment {
+  padding: 28px;
+  border: 1px dashed #cfc3b2;
+  text-align: center;
+}
+
 @media (max-width: 900px) {
   .quick-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -273,6 +525,10 @@
 
   .pocket-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .guestbook-copy {
+    position: static;
   }
 }
 
@@ -359,5 +615,19 @@
     min-width: min(82vw, 330px);
     min-height: 420px;
     scroll-snap-align: start;
+  }
+
+  .guestbook-panel form,
+  .notes-panel {
+    padding: 28px 22px;
+  }
+
+  .rating-control {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .star-input button {
+    font-size: 31px;
   }
 }
