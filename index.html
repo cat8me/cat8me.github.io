@@ -106,6 +106,15 @@
         <div class="filter-row" role="group" aria-label="Filter itinerary">
           <button class="filter active" data-filter="all">All</button><button class="filter" data-filter="nature">Nature</button><button class="filter" data-filter="food">Food</button><button class="filter" data-filter="hotel">Hotels</button><button class="filter" data-filter="museum">Museums</button>
         </div>
+        <div class="itinerary-navigator">
+          <div class="itinerary-navigator-head">
+            <div><small>DAY NAVIGATOR</small><p id="itinerary-status" aria-live="polite">Showing the complete itinerary</p></div>
+            <button class="guide-control" id="toggle-all-guides" type="button" aria-expanded="false">Open all guide notes</button>
+          </div>
+          <nav class="itinerary-day-links" aria-label="Jump between itinerary days">
+            <a href="#day-1">D1</a><a href="#day-2">D2</a><a href="#day-3">D3</a><a href="#day-4">D4</a><a href="#day-5">D5</a><a href="#day-6">D6</a><a href="#day-7">D7</a><a href="#day-8">D8</a><a href="#day-9">D9</a>
+          </nav>
+        </div>
         <div id="days"></div>
       </section>
 
@@ -278,6 +287,32 @@
           const output = document.querySelector('#saved-count');
           if (output) output.textContent = count;
         };
+        const updateItineraryNavigator = () => {
+          const dayBlocks = [...document.querySelectorAll('.day-block')];
+          const stopCount = dayBlocks.reduce((total, day) => total + day.querySelectorAll('.stop-card').length, 0);
+          const status = document.querySelector('#itinerary-status');
+          const activeFilter = document.querySelector('.filter.active')?.textContent.trim() || 'All';
+          if (status) {
+            const filterLabel = activeFilter === 'All' ? 'complete itinerary' : activeFilter.toLowerCase();
+            status.textContent = `${stopCount} ${stopCount === 1 ? 'stop' : 'stops'} across ${dayBlocks.length} ${dayBlocks.length === 1 ? 'day' : 'days'} · ${filterLabel}`;
+          }
+
+          const availableDays = new Set(dayBlocks.map((day) => day.id));
+          document.querySelectorAll('.itinerary-day-links a').forEach((link) => {
+            const isAvailable = availableDays.has(link.hash.slice(1));
+            link.classList.toggle('unavailable', !isAvailable);
+            link.setAttribute('aria-disabled', String(!isAvailable));
+          });
+
+          const guides = [...document.querySelectorAll('.guide-toggle')];
+          const allOpen = guides.length > 0 && guides.every((guide) => guide.open);
+          const control = document.querySelector('#toggle-all-guides');
+          if (control) {
+            control.disabled = guides.length === 0;
+            control.setAttribute('aria-expanded', String(allOpen));
+            control.textContent = allOpen ? 'Close all guide notes' : 'Open all guide notes';
+          }
+        };
         const enhanceRecommendations = () => {
           const saved = readRecommendations();
           document.querySelectorAll('.mini-rate').forEach((button) => {
@@ -315,12 +350,33 @@
           });
           enhanceGuideNotes();
           enhanceRecommendations();
+          updateItineraryNavigator();
         };
         const days = document.querySelector('#days');
         labelDays();
         new MutationObserver(labelDays).observe(days, { childList: true });
 
         document.addEventListener('click', (event) => {
+          const guideControl = event.target.closest('#toggle-all-guides');
+          if (guideControl) {
+            const guides = [...document.querySelectorAll('.guide-toggle')];
+            const shouldOpen = !guides.every((guide) => guide.open);
+            guides.forEach((guide) => { guide.open = shouldOpen; });
+            updateItineraryNavigator();
+          }
+
+          const dayLink = event.target.closest('.itinerary-day-links a');
+          if (dayLink?.classList.contains('unavailable')) event.preventDefault();
+
+          if (event.target.closest('.filter')) {
+            requestAnimationFrame(() => {
+              updateItineraryNavigator();
+              markCurrentDay();
+            });
+          }
+
+          if (event.target.closest('.guide-toggle summary')) requestAnimationFrame(updateItineraryNavigator);
+
           const recommendation = event.target.closest('.mini-rate');
           if (recommendation) {
             const saved = readRecommendations();
@@ -358,6 +414,23 @@
           button.setAttribute('role', 'radio');
           button.setAttribute('aria-checked', String(button.dataset.rating === '5'));
         });
+
+        const markCurrentDay = () => {
+          const dayBlocks = [...document.querySelectorAll('.day-block')];
+          if (!dayBlocks.length) return;
+          const current = dayBlocks.reduce((closest, day) => {
+            const distance = Math.abs(day.getBoundingClientRect().top - 190);
+            return distance < closest.distance ? { day, distance } : closest;
+          }, { day: dayBlocks[0], distance: Infinity }).day;
+          document.querySelectorAll('.itinerary-day-links a').forEach((link) => {
+            const isCurrent = link.hash === `#${current.id}`;
+            link.classList.toggle('current', isCurrent);
+            if (isCurrent) link.setAttribute('aria-current', 'true');
+            else link.removeAttribute('aria-current');
+          });
+        };
+        document.addEventListener('scroll', markCurrentDay, { passive: true });
+        markCurrentDay();
       });
     </script>
   </body>

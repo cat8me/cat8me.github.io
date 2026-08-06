@@ -136,6 +136,99 @@
   letter-spacing: .04em;
 }
 
+/* A compact day navigator keeps a long itinerary easy to scan and control. */
+.itinerary-navigator {
+  margin: 6px 0 22px;
+  border: 1px solid #d9d0c1;
+  background: #fffaf1d9;
+  box-shadow: 0 10px 28px #5d3b2510;
+}
+
+.itinerary-navigator-head {
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.itinerary-navigator-head small {
+  color: var(--gold);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .17em;
+}
+
+.itinerary-navigator-head p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.guide-control {
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid #cbbdaa;
+  background: transparent;
+  color: var(--forest);
+  cursor: pointer;
+  font: 700 10px/1.2 inherit;
+  letter-spacing: .04em;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.guide-control:hover,
+.guide-control:focus-visible {
+  border-color: var(--forest);
+  background: var(--forest);
+  color: #fff;
+  outline: none;
+}
+
+.guide-control:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+.itinerary-day-links {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+}
+
+.itinerary-day-links a {
+  min-height: 49px;
+  display: grid;
+  place-items: center;
+  border-right: 1px solid var(--line);
+  color: var(--forest);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-decoration: none;
+  transition: background .2s ease, color .2s ease;
+}
+
+.itinerary-day-links a:last-child {
+  border-right: 0;
+}
+
+.itinerary-day-links a:hover,
+.itinerary-day-links a:focus-visible,
+.itinerary-day-links a.current {
+  background: var(--forest);
+  color: #fff;
+  outline: none;
+}
+
+.itinerary-day-links a.unavailable {
+  background: #efe9de;
+  color: #9c9287;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
 /* Keep itinerary cards aligned so every stop is equally easy to scan. */
 .stop-card,
 .stop-card.featured {
@@ -567,6 +660,37 @@
 
   .hero-actions {
     margin-top: 16px;
+  }
+
+  .itinerary-navigator {
+    overflow: hidden;
+  }
+
+  .itinerary-navigator-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .guide-control {
+    width: 100%;
+  }
+
+  .itinerary-day-links {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .itinerary-day-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .itinerary-day-links a {
+    min-width: 54px;
+    border-bottom: 0;
+    scroll-snap-align: start;
   }
 
   .quick-reference {
