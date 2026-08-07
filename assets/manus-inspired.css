@@ -761,3 +761,276 @@
     font-size: 31px;
   }
 }
+
+
+/* Master-aligned Quick Reference and Cuisine Pocket List */
+.master-section-head {
+  margin-bottom: 46px;
+  text-align: center;
+}
+
+.master-section-head h2 {
+  margin: 0;
+  color: var(--ink);
+  font: 600 clamp(42px, 5vw, 72px)/1.05 "Playfair Display", serif;
+  letter-spacing: -.035em;
+}
+
+.master-section-head p {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: clamp(16px, 1.7vw, 23px);
+  line-height: 1.45;
+}
+
+.reference-shell,
+.cuisine-shell {
+  background: #f7f4ec;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.reference-grid {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr 1fr;
+  gap: 22px;
+  align-items: stretch;
+}
+
+.reference-card,
+.cuisine-card,
+.pocket-panel {
+  padding: clamp(28px, 3vw, 44px);
+  border: 1px solid #e2ddd3;
+  border-radius: 28px;
+  background: #fffefb;
+  box-shadow: 0 14px 34px #49332e0c;
+}
+
+.reference-card h3,
+.cuisine-card h3,
+.pocket-panel h3 {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 30px;
+  color: var(--ink);
+  font: 600 clamp(27px, 2.3vw, 38px)/1.15 "Playfair Display", serif;
+}
+
+.reference-icon {
+  width: 31px;
+  height: 31px;
+  flex: 0 0 31px;
+  fill: none;
+  stroke: var(--forest);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.reference-lead {
+  display: grid;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.48;
+}
+
+.reference-lead strong {
+  color: var(--ink);
+  font-size: 18px;
+}
+
+.reference-lead.roomy {
+  gap: 13px;
+}
+
+.reference-rule {
+  height: 1px;
+  margin: 24px 0 6px;
+  background: var(--line);
+}
+
+.flight-leg {
+  display: grid;
+  gap: 3px;
+  padding: 17px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.38;
+}
+
+.flight-leg:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.flight-leg strong {
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.reference-card .reference-subheading {
+  margin: 26px 0 20px;
+  font-size: clamp(25px, 2.1vw, 34px);
+}
+
+.passenger-list {
+  display: grid;
+  gap: 18px;
+}
+
+.passenger-list p {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.passenger-list strong {
+  color: var(--ink);
+  font-size: 16px;
+}
+
+.master-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.master-tags span {
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #f2efe7;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.cuisine-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.cuisine-card {
+  min-width: 0;
+}
+
+.cuisine-list {
+  margin: 0;
+}
+
+.cuisine-list > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+
+.cuisine-list > div:last-child {
+  border-bottom: 0;
+}
+
+.cuisine-list dt,
+.cuisine-list dd {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.cuisine-list dt {
+  color: var(--ink);
+}
+
+.cuisine-list dd {
+  color: var(--forest);
+  font-weight: 600;
+  text-align: right;
+}
+
+.seasonal-note {
+  margin: 28px 0 0;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.seasonal-note strong {
+  color: var(--ink);
+}
+
+.pocket-panel {
+  margin-top: 28px;
+}
+
+.pocket-panel h3 {
+  margin-bottom: 24px;
+}
+
+.pocket-tags span {
+  font-size: 16px;
+}
+
+@media (max-width: 1080px) {
+  .reference-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .philosophy-reference-card {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  .master-section-head {
+    margin-bottom: 30px;
+  }
+
+  .reference-grid,
+  .cuisine-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .philosophy-reference-card {
+    grid-column: auto;
+  }
+
+  .reference-card,
+  .cuisine-card,
+  .pocket-panel {
+    padding: 26px 22px;
+    border-radius: 22px;
+  }
+
+  .reference-card h3,
+  .cuisine-card h3,
+  .pocket-panel h3 {
+    margin-bottom: 23px;
+  }
+
+  .cuisine-list > div {
+    gap: 14px;
+  }
+
+  .cuisine-list dt,
+  .cuisine-list dd {
+    font-size: 15px;
+  }
+
+  .master-tags {
+    gap: 9px;
+  }
+
+  .master-tags span {
+    padding: 9px 13px;
+    font-size: 13px;
+  }
+}
