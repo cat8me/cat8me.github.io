@@ -462,6 +462,94 @@
   text-underline-offset: 4px;
 }
 
+/* Trip albums connect the finished journey to its full photo archive. */
+.photo-albums {
+  background: var(--cream);
+  border-top: 1px solid var(--line);
+}
+
+.photo-albums .section-head {
+  margin-bottom: 48px;
+}
+
+.photo-albums h2 em {
+  color: var(--forest);
+  font-weight: 500;
+}
+
+.album-link-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.album-link {
+  min-width: 0;
+  min-height: 230px;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) 46px;
+  gap: 22px;
+  align-items: end;
+  padding: 34px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow: 0 12px 35px #5d3b2514;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.album-link:hover {
+  border-color: #bd9a78;
+  box-shadow: 0 18px 42px #5d3b2524;
+  transform: translateY(-3px);
+}
+
+.album-number {
+  align-self: start;
+  color: var(--forest);
+  font: 600 34px/1 "Playfair Display", serif;
+}
+
+.album-copy {
+  display: grid;
+  gap: 10px;
+}
+
+.album-copy small {
+  color: var(--gold);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+.album-copy strong {
+  font: 600 clamp(27px, 3vw, 42px)/1.08 "Playfair Display", serif;
+}
+
+.album-copy > span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.album-arrow {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--forest);
+  font-size: 20px;
+  transition: background .2s ease, color .2s ease;
+}
+
+.album-link:hover .album-arrow {
+  background: var(--forest);
+  color: #fff;
+}
+
 /* Reviews stay useful in preview mode without implying that local data is public. */
 .guestbook {
   align-items: start;
@@ -625,6 +713,10 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .album-link-grid {
+    grid-template-columns: 1fr;
+  }
+
   .guestbook-copy {
     position: static;
   }
@@ -745,6 +837,30 @@
     min-width: min(82vw, 330px);
     min-height: 420px;
     scroll-snap-align: start;
+  }
+
+  .photo-albums .section-head {
+    gap: 24px;
+  }
+
+  .album-link {
+    min-height: 210px;
+    grid-template-columns: 40px minmax(0, 1fr) 36px;
+    gap: 14px;
+    padding: 25px 20px;
+  }
+
+  .album-number {
+    font-size: 27px;
+  }
+
+  .album-copy strong {
+    font-size: 27px;
+  }
+
+  .album-arrow {
+    width: 36px;
+    height: 36px;
   }
 
   .guestbook-panel form,
