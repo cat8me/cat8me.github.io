@@ -1,4 +1,9 @@
 /* Manus-inspired improvements, adapted to the existing Postcard Journey style. */
+html,
+body {
+  overflow-x: hidden;
+}
+
 .hero {
   background-image: url("./hero-germany-austria-2026.webp");
   background-position: center 45%;

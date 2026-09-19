@@ -2,6 +2,36 @@
 
 > **Single Source of Truth Travel Project**
 
+## Published Travel Journal
+
+The GitHub Pages repository is organized as a permanent travel-journal hub:
+
+```text
+https://cat8me.github.io/
+└── trips/
+    └── 001-2026-09-germany-austria/
+```
+
+Every trip uses the same folder and URL naming rule:
+
+```text
+NNN-YYYY-MM-place
+```
+
+- `NNN`: permanent three-digit sequence number, beginning with `001`
+- `YYYY-MM`: trip year and month
+- `place`: lowercase English destination name with hyphens between words
+- Folder name and public URL slug must always match
+- Once assigned, the sequence number does not change if the travel date changes
+
+Example:
+
+```text
+trips/001-2026-09-germany-austria/
+trips/002-2027-03-japan/
+trips/003-2027-06-taitung/
+```
+
 ---
 
 # 專案目的
