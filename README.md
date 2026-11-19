@@ -9,7 +9,8 @@ The GitHub Pages repository is organized as a permanent travel-journal hub:
 ```text
 https://cat8me.github.io/
 └── trips/
-    └── 001-2026-09-germany-austria/
+    ├── 001-2026-09-germany-austria/
+    └── 002-2026-11-bangkok/
 ```
 
 Every trip uses the same folder and URL naming rule:
@@ -28,7 +29,7 @@ Example:
 
 ```text
 trips/001-2026-09-germany-austria/
-trips/002-2027-03-japan/
+trips/002-2026-11-bangkok/
 trips/003-2027-06-taitung/
 ```
 

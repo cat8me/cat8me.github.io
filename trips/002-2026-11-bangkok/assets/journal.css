@@ -1,0 +1,236 @@
+#bangkok-journal {
+  --bj-forest: #29443A;
+  --bj-rust: #A24F3D;
+  --bj-blue: #7893A4;
+  --bj-gold: #B98A48;
+  --bj-ivory: #F7F2E8;
+  --bj-ink: #2D2925;
+  --bj-line: #d9cdbc;
+  --bj-quiet: #5b554d;
+  --bj-serif: "Playfair Display", Georgia, serif;
+  --bj-sans: "DM Sans", system-ui, sans-serif;
+  display: block;
+  background: var(--bj-ivory);
+  color: var(--bj-ink);
+  color-scheme: light;
+  font: 400 1rem/1.65 var(--bj-sans);
+  letter-spacing: normal;
+}
+#bangkok-journal *, #bangkok-journal *::before, #bangkok-journal *::after { box-sizing: border-box; }
+#bangkok-journal a { color: inherit; text-underline-offset: .16em; }
+#bangkok-journal a:focus-visible, #bangkok-journal summary:focus-visible { outline: 2px solid var(--bj-rust); outline-offset: 4px; }
+#bangkok-journal h1, #bangkok-journal h2, #bangkok-journal h3, #bangkok-journal p, #bangkok-journal figure { margin: 0; }
+#bangkok-journal h1, #bangkok-journal h2, #bangkok-journal h3 {
+  color: var(--bj-forest);
+  font-family: var(--bj-serif);
+  font-weight: 600;
+  letter-spacing: normal;
+}
+#bangkok-journal h2 { font-size: clamp(2.3rem, 5.4vw, 3.55rem); line-height: 1.06; }
+#bangkok-journal h3 { font-size: 1.2rem; line-height: 1.3; }
+#bangkok-journal .bj-wrap { width: min(1140px, 100% - clamp(36px, 9vw, 120px)); margin-inline: auto; }
+
+#bangkok-journal .bj-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 22px;
+  border-bottom: 1px solid var(--bj-line);
+  padding: 10px max(calc((100% - 1140px) / 2), clamp(18px, 4.5vw, 60px));
+  color: var(--bj-forest);
+  font-size: .9rem;
+  font-weight: 700;
+}
+#bangkok-journal .bj-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+#bangkok-journal .bj-mark {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid var(--bj-forest);
+  font: 600 1rem var(--bj-serif);
+}
+#bangkok-journal .bj-brand-divider { color: var(--bj-rust); margin-inline: .15em; }
+#bangkok-journal .bj-header nav { display: flex; flex-wrap: wrap; gap: 0 18px; }
+#bangkok-journal .bj-header nav a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+#bangkok-journal .bj-header a:hover { text-decoration: underline; }
+
+#bangkok-journal .bj-hero { padding-block: clamp(32px, 6.5vw, 76px) 0; }
+#bangkok-journal .bj-hero-copy { max-width: 710px; margin-bottom: clamp(22px, 4vw, 36px); }
+#bangkok-journal .bj-kicker {
+  margin-bottom: 11px;
+  color: var(--bj-rust);
+  font-size: .875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+}
+#bangkok-journal h1 { font-size: clamp(4rem, 10.5vw, 8.1rem); line-height: .99; }
+#bangkok-journal .bj-deck {
+  margin-top: 7px;
+  color: var(--bj-rust);
+  font: italic 500 clamp(1.45rem, 3vw, 2.55rem)/1.2 var(--bj-serif);
+}
+#bangkok-journal .bj-summary { max-width: 49ch; margin-top: 16px; color: var(--bj-quiet); }
+#bangkok-journal .bj-action {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 17px;
+  padding: 8px 14px;
+  background: var(--bj-forest);
+  color: var(--bj-ivory);
+  border-radius: 4px;
+  font-weight: 700;
+  text-decoration: none;
+}
+#bangkok-journal .bj-action:hover { text-decoration: underline; }
+#bangkok-journal .bj-hero-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 190px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+#bangkok-journal figcaption {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2px 18px;
+  padding-top: 7px;
+  color: var(--bj-quiet);
+  font-size: .8125rem;
+}
+
+#bangkok-journal .bj-section { padding-block: clamp(36px, 7vw, 74px); scroll-margin-top: 16px; }
+#bangkok-journal .bj-section-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-bottom: 20px;
+}
+#bangkok-journal .bj-section-top p { color: var(--bj-quiet); }
+#bangkok-journal .bj-days { border-bottom: 1px solid var(--bj-line); }
+#bangkok-journal details { display: block; border-top: 1px solid var(--bj-line); }
+#bangkok-journal summary {
+  display: grid;
+  grid-template-columns: 4.7rem 1fr 1.25em;
+  align-items: center;
+  min-height: 56px;
+  gap: 10px;
+  padding-block: 10px;
+  list-style: none;
+  cursor: pointer;
+  color: var(--bj-forest);
+}
+#bangkok-journal summary::-webkit-details-marker { display: none; }
+#bangkok-journal summary::after { content: "+"; color: var(--bj-rust); font-size: 1.3rem; line-height: 1; text-align: center; }
+#bangkok-journal details[open] summary::after { content: "−"; }
+#bangkok-journal summary:hover strong { text-decoration: underline; text-underline-offset: .16em; }
+#bangkok-journal summary strong { font: 600 clamp(1.08rem, 2.25vw, 1.5rem)/1.25 var(--bj-serif); }
+#bangkok-journal .bj-day-label { color: var(--bj-rust); font-size: .875rem; font-weight: 700; }
+#bangkok-journal .bj-day-body { display: grid; gap: 12px; max-width: 715px; padding: 3px 0 20px calc(4.7rem + 10px); }
+#bangkok-journal .bj-day-body p { color: var(--bj-quiet); margin-top: 3px; }
+#bangkok-journal .bj-link { width: fit-content; color: var(--bj-forest); font-weight: 700; min-height: 44px; display: inline-flex; align-items: center; }
+
+#bangkok-journal .bj-transport {
+  background: color-mix(in srgb, var(--bj-blue) 11%, var(--bj-ivory));
+  border-top: 1px solid var(--bj-line);
+  scroll-margin-top: 16px;
+}
+#bangkok-journal .bj-legs { list-style: none; padding: 0; margin: 0; border-bottom: 1px solid #c3bdaf; }
+#bangkok-journal .bj-legs li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 20px;
+  padding-block: 14px;
+  border-top: 1px solid #c3bdaf;
+}
+#bangkok-journal .bj-legs p { color: var(--bj-quiet); margin-top: 3px; }
+#bangkok-journal .bj-legs strong { color: var(--bj-forest); white-space: nowrap; font-variant-numeric: tabular-nums; font-size: .9rem; }
+#bangkok-journal .bj-footer { background: var(--bj-forest); color: var(--bj-ivory); }
+#bangkok-journal .bj-footer div { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 20px; padding-block: 18px; font-size: .9rem; }
+#bangkok-journal .bj-footer a { font-weight: 700; }
+
+@media (min-width: 700px) {
+  #bangkok-journal .bj-hero { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr); align-items: center; gap: 24px; }
+  #bangkok-journal .bj-hero-copy { margin-bottom: 0; padding-bottom: 22px; }
+  #bangkok-journal h1 { font-size: clamp(4rem, 7vw, 7rem); }
+  #bangkok-journal .bj-hero-photo img { aspect-ratio: 1.38; }
+}
+@media (max-width: 450px) {
+  #bangkok-journal summary { grid-template-columns: 3.35rem 1fr 1em; gap: 6px; }
+  #bangkok-journal .bj-day-body { padding-left: 0; }
+  #bangkok-journal .bj-legs li { flex-wrap: wrap; }
+  #bangkok-journal .bj-legs strong { color: var(--bj-rust); }
+}
+
+#bangkok-journal .bj-route-links { display: flex; flex-wrap: wrap; gap: 0 18px; }
+
+#bangkok-journal .bj-slot {
+  display: grid;
+  grid-template-columns: minmax(6rem, 7.25rem) minmax(0, 1fr);
+  gap: 7px 12px;
+  padding-block: 10px;
+  border-bottom: 1px solid var(--bj-line);
+}
+#bangkok-journal .bj-slot .bj-slot-time {
+  margin: 0;
+  color: var(--bj-rust);
+  font-size: .9rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+#bangkok-journal .bj-plans {
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+#bangkok-journal .bj-plans legend {
+  padding: 0;
+  margin-bottom: 6px;
+  color: var(--bj-forest);
+  font-weight: 700;
+}
+#bangkok-journal .bj-plan-choice {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px 8px;
+}
+#bangkok-journal .bj-plan-choice input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip-path: inset(50%);
+}
+#bangkok-journal .bj-plan-choice label {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1px 7px;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid var(--bj-forest);
+  border-radius: 4px;
+  color: var(--bj-forest);
+  font-weight: 700;
+  cursor: pointer;
+}
+#bangkok-journal .bj-plan-choice label span { font-size: .875rem; font-weight: 400; }
+#bangkok-journal .bj-plan-choice input:checked + label { background: var(--bj-forest); color: var(--bj-ivory); }
+#bangkok-journal .bj-plan-choice input:focus-visible + label { outline: 2px solid var(--bj-rust); outline-offset: 2px; }
+#bangkok-journal .bj-plan-content { grid-column: 1 / -1; }
+#bangkok-journal .bj-k-plan, #bangkok-journal .bj-c-plan { display: none; }
+#bangkok-journal #bj-plan-k:checked ~ .bj-plan-content .bj-k-plan,
+#bangkok-journal #bj-plan-c:checked ~ .bj-plan-content .bj-c-plan { display: block; }
+
+@media (max-width: 450px) {
+  #bangkok-journal .bj-slot { grid-template-columns: 1fr; gap: 3px; }
+}
