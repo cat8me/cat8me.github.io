@@ -212,7 +212,7 @@
 }
 #bangkok-journal .bj-plan-choice label {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
   gap: 1px 7px;
   min-height: 44px;
@@ -224,6 +224,13 @@
   cursor: pointer;
 }
 #bangkok-journal .bj-plan-choice label span { font-size: .875rem; font-weight: 400; }
+#bangkok-journal .bj-companion-icon {
+  display: block;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
 #bangkok-journal .bj-plan-choice input:checked + label { background: var(--bj-forest); color: var(--bj-ivory); }
 #bangkok-journal .bj-plan-choice input:focus-visible + label { outline: 2px solid var(--bj-rust); outline-offset: 2px; }
 #bangkok-journal .bj-plan-content { grid-column: 1 / -1; }
