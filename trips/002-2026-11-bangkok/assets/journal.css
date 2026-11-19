@@ -234,3 +234,59 @@
 @media (max-width: 450px) {
   #bangkok-journal .bj-slot { grid-template-columns: 1fr; gap: 3px; }
 }
+
+#bangkok-journal .bj-reference { padding-bottom: 0; }
+#bangkok-journal .bj-flights {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 24px;
+  margin-bottom: 22px;
+}
+#bangkok-journal .bj-flight {
+  min-width: 0;
+  padding: 15px 16px;
+  border: 1px solid var(--bj-line);
+  border-radius: 5px;
+}
+#bangkok-journal .bj-reference-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6px 10px;
+  flex-wrap: wrap;
+}
+#bangkok-journal .bj-reference-date { margin-top: 4px; color: var(--bj-quiet); }
+#bangkok-journal .bj-flight-stops {
+  display: grid;
+  gap: 9px;
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--bj-line);
+}
+#bangkok-journal .bj-flight-stops dt { font-weight: 700; }
+#bangkok-journal .bj-flight-stops dd { margin: 0; color: var(--bj-quiet); }
+#bangkok-journal .bj-flight-stops time { color: var(--bj-forest); font-weight: 700; }
+#bangkok-journal .bj-booking-list { list-style: none; padding: 0; margin: 0; border-bottom: 1px solid var(--bj-line); }
+#bangkok-journal .bj-booking-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  padding-block: 12px;
+  border-top: 1px solid var(--bj-line);
+}
+#bangkok-journal .bj-booking-list p { margin-top: 4px; color: var(--bj-quiet); }
+#bangkok-journal .bj-status {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 2px 7px;
+  color: var(--bj-forest);
+  background: #e4e9dc;
+  font-size: .875rem;
+  font-weight: 700;
+}
+#bangkok-journal .bj-status-pending { background: #f1e3ce; color: #694721; }
+@media (max-width: 560px) {
+  #bangkok-journal .bj-flights { grid-template-columns: 1fr; }
+}
